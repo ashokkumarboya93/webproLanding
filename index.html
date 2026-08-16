@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebPro Analytics — Privacy-First Behavioral Analytics & Heatmaps</title>
+  <meta name="description" content="A universal, open-source alternative to Microsoft Clarity & Hotjar. Instant click heatmaps, privacy-first DOM replays, and AI-grounded conversion funnels with 0.00ms page load penalty." />
+  <meta name="keywords" content="heatmaps, session replay, behavioral analytics, Microsoft Clarity alternative, Hotjar alternative, privacy-first analytics, conversion funnels" />
+  
+  <!-- OpenGraph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="WebPro Analytics — Universal Behavioral Analytics & Replays" />
+  <meta property="og:description" content="See Every Click, Scroll, & Frustration on Any Website in Real Time with zero performance impact." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#001E2B',
+            'obsidian-light': '#082836',
+            'spring-green': '#00ED64',
+            'emerald-deep': '#00684A',
+            'mint-glow': 'rgba(0, 237, 100, 0.08)',
+            'border-subdued': '#E8EDEB',
+            'text-muted': '#5C727D',
+            canvas: '#F9FBFA'
+          },
+          fontFamily: {
+            heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          boxShadow: {
+            'elevated': '0 20px 40px -15px rgba(0,30,43,0.06)',
+            'elevated-hover': '0 30px 60px -15px rgba(0,30,43,0.12)',
+            'neon-green': '0 0 25px rgba(0, 237, 100, 0.35)',
+            'dark-glow': '0 25px 50px -12px rgba(0, 30, 43, 0.3)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti for Interactive Moments -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="relative text-obsidian bg-canvas selection:bg-spring-green selection:text-obsidian antialiased overflow-x-hidden">
+
+  <!-- Ambient Glow Elements -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- STICKY GLASSMORPHIC NAVIGATION -->
+  <header id="mainNav" class="sticky top-0 z-50 w-full glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-obsidian flex items-center justify-center border border-emerald-deep/40 shadow-sm group-hover:border-spring-green transition-colors relative">
+          <i data-lucide="activity" class="w-5 h-5 text-spring-green"></i>
+          <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-spring-green shadow-sm animate-pulse"></span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-heading font-extrabold text-xl tracking-tight text-obsidian flex items-center gap-1">
+            WebPro <span class="text-emerald-deep font-semibold text-sm px-1.5 py-0.5 rounded bg-spring-green/15 text-emerald-800">Analytics</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center gap-8">
+        <!-- Features Dropdown Trigger -->
+        <div class="relative group" id="featuresDropdown">
+          <button class="flex items-center gap-1.5 text-sm font-medium text-obsidian hover:text-emerald-deep py-2 transition-colors">
+            Features
+            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180 text-text-muted"></i>
+          </button>
+          
+          <!-- Features Megamenu Dropdown -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-96 rounded-2xl bg-white p-4 card-elevated border border-border-subdued opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top z-50">
+            <div class="space-y-2">
+              <a href="#heatmaps" class="flex items-start gap-3 p-3 rounded-xl hover:bg-spring-green/10 transition-colors">
+                <div class="w-9 h-9 rounded-lg bg-obsidian flex items-center justify-center shrink-0">
+                  <i data-lucide="flame" class="w-4 h-4 text-spring-green"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-obsidian flex items-center gap-1.5">
+                    Clarity Heatmaps
+                    <span class="text-[10px] bg-spring-green/30 text-emerald-900 font-mono px-1.5 py-0.2 rounded font-bold">5KB</span>
+                  </div>
+                  <p class="text-xs text-text-muted mt-0.5">Live click clusters, scroll reach % & rage maps</p>
+                </div>
+              </a>
+
+              <a href="#session-replay" class="flex items-start gap-3 p-3 rounded-xl hover:bg-spring-green/10 transition-colors">
+                <div class="w-9 h-9 rounded-lg bg-obsidian flex items-center justify-center shrink-0">
+                  <i data-lucide="video" class="w-4 h-4 text-spring-green"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-obsidian flex items-center gap-1.5">
+                    DOM Session Replay
+                    <span class="text-[10px] bg-emerald-100 text-emerald-800 font-mono px-1.5 py-0.2 rounded">rrweb</span>
+                  </div>
+                  <p class="text-xs text-text-muted mt-0.5">Pixel-perfect privacy-first DOM reconstruction</p>
+                </div>
+              </a>
+
+              <a href="#ai-insights" class="flex items-start gap-3 p-3 rounded-xl hover:bg-spring-green/10 transition-colors">
+                <div class="w-9 h-9 rounded-lg bg-obsidian flex items-center justify-center shrink-0">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-spring-green"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-obsidian">AI Root-Cause Copilot</div>
+                  <p class="text-xs text-text-muted mt-0.5">Automated friction & dead click diagnosis</p>
+                </div>
+              </a>
+
+              <a href="#funnels" class="flex items-start gap-3 p-3 rounded-xl hover:bg-spring-green/10 transition-colors">
+                <div class="w-9 h-9 rounded-lg bg-obsidian flex items-center justify-center shrink-0">
+                  <i data-lucide="git-merge" class="w-4 h-4 text-spring-green"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-obsidian">Conversion Funnels</div>
+                  <p class="text-xs text-text-muted mt-0.5">Multi-step user journey drop-off analysis</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="#playground" class="text-sm font-medium text-obsidian hover:text-emerald-deep transition-colors">How It Works</a>
+        <button onclick="openSandboxModal()" class="text-sm font-medium text-obsidian hover:text-emerald-deep flex items-center gap-1.5 transition-colors">
+          <i data-lucide="play-circle" class="w-4 h-4 text-spring-green"></i>
+          Live Sandbox Demo
+        </button>
+        <a href="#pricing" class="text-sm font-medium text-obsidian hover:text-emerald-deep transition-colors">Pricing</a>
+        <a href="#comparison" class="text-sm font-medium text-obsidian hover:text-emerald-deep transition-colors">Comparison</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button onclick="alert('Demo Login: Guest session active.')" class="btn-ghost px-4 py-2.5 rounded-xl text-sm font-semibold">
+          Sign In
+        </button>
+        <a href="#playground" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 group shadow-sm">
+          <span>Start Free — 1 Line</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 text-spring-green group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Hamburger -->
+      <div class="flex sm:hidden">
+        <button id="mobileMenuBtn" class="p-2 rounded-lg text-obsidian hover:bg-black/5" aria-label="Open navigation menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileDrawer" class="hidden md:hidden px-4 pt-2 pb-6 bg-white/95 border-b border-border-subdued backdrop-blur-lg">
+      <div class="flex flex-col space-y-3 font-medium text-sm">
+        <a href="#heatmaps" class="py-2 text-obsidian">Heatmaps & Replay</a>
+        <a href="#ai-insights" class="py-2 text-obsidian">AI Root-Cause Copilot</a>
+        <a href="#playground" class="py-2 text-obsidian">1-Line Installation</a>
+        <button onclick="openSandboxModal()" class="py-2 text-left text-obsidian flex items-center gap-2">
+          <i data-lucide="play-circle" class="w-4 h-4 text-spring-green"></i>
+          Live Sandbox Demo
+        </button>
+        <a href="#pricing" class="py-2 text-obsidian">Pricing Calculator</a>
+        <a href="#comparison" class="py-2 text-obsidian">WebPro vs Clarity</a>
+        <div class="pt-3 border-t border-border-subdued flex flex-col gap-2">
+          <a href="#playground" class="btn-primary text-center py-2.5 rounded-xl text-sm font-semibold">
+            Start Free — 1 Line of Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Top Floating Pill -->
+      <div class="flex justify-center mb-6">
+        <div class="pill-badge group cursor-pointer" onclick="scrollToElement('playground')">
+          <span class="pulse-dot"></span>
+          <span class="text-xs sm:text-sm">⚡ Zero-Dependency 5KB Script • 100% Privacy Compliant • Universal Compatibility</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-emerald-800 group-hover:translate-x-0.5 transition-transform"></i>
+        </div>
+      </div>
+
+      <!-- Hero Headline & Subtitle -->
+      <div class="text-center max-w-4xl mx-auto space-y-6">
+        <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-obsidian leading-[1.12]">
+          See Every Click, Scroll, & Frustration on Any Website <span class="relative inline-block text-emerald-deep">in Real Time.<span class="absolute -bottom-1 left-0 w-full h-2.5 bg-spring-green/35 -z-10 rounded-full"></span></span>
+        </h1>
+        <p class="font-body text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed">
+          A universal, open-source alternative to Microsoft Clarity & Hotjar. Instant click heatmaps, privacy-first DOM replays, and AI-grounded conversion funnels with <strong class="text-obsidian font-semibold">0.00ms page load penalty</strong>.
+        </p>
+
+        <!-- Dual CTA Row -->
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#playground" class="w-full sm:w-auto btn-primary px-8 py-4 rounded-2xl text-base font-bold flex items-center justify-center gap-3 shadow-lg shadow-emerald-deep/15">
+            <span>Deploy in 30 Seconds</span>
+            <i data-lucide="arrow-right" class="w-5 h-5 text-spring-green"></i>
+          </a>
+          <button onclick="openSandboxModal()" class="w-full sm:w-auto btn-ghost px-7 py-4 rounded-2xl text-base font-semibold flex items-center justify-center gap-2.5 bg-white shadow-sm border border-border-subdued hover:border-spring-green">
+            <i data-lucide="play" class="w-4 h-4 fill-emerald-deep text-emerald-deep"></i>
+            <span>Interactive Sandbox Demo</span>
+          </button>
+        </div>
+
+        <!-- Trust Badges Under CTA -->
+        <div class="pt-2 flex flex-wrap items-center justify-center gap-6 text-xs text-text-muted font-medium">
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> No Credit Card Required
+          </div>
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> GDPR & HIPAA Cookie-less Mode
+          </div>
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> MIT Licensed Self-Host Option
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO INTERACTIVE LIVE DASHBOARD MOCKUP -->
+      <div class="mt-14 sm:mt-20 hero-mockup-wrapper max-w-6xl mx-auto">
+        <div id="heroCard" class="hero-mockup-card rounded-3xl bg-white border border-border-subdued overflow-hidden relative">
+          
+          <!-- Mockup Window Header -->
+          <div class="bg-obsidian px-5 py-3.5 flex items-center justify-between border-b border-border-subdued/20 select-none">
+            <div class="flex items-center gap-3">
+              <!-- Window dots -->
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-[#FF5F56] inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-[#27C93F] inline-block"></span>
+              </div>
+              <div class="hidden sm:flex items-center gap-2 bg-obsidian-light/80 px-3 py-1 rounded-md text-xs font-mono text-gray-300 border border-white/10">
+                <i data-lucide="lock" class="w-3 h-3 text-spring-green"></i>
+                <span>analytics.webpro.io/live/dashboard-executive</span>
+              </div>
+            </div>
+
+            <!-- View Switcher Tabs inside Hero -->
+            <div class="flex items-center gap-1 bg-obsidian-light/90 p-1 rounded-xl text-xs font-medium text-white border border-white/10">
+              <button id="heroTabHeatmap" onclick="setHeroMode('heatmap')" class="px-3 py-1 rounded-lg bg-spring-green text-obsidian font-bold transition-all">🔥 Heatmap</button>
+              <button id="heroTabScroll" onclick="setHeroMode('scroll')" class="px-3 py-1 rounded-lg text-gray-300 hover:text-white transition-all">📜 Scroll Reach</button>
+              <button id="heroTabStream" onclick="setHeroMode('stream')" class="px-3 py-1 rounded-lg text-gray-300 hover:text-white transition-all">⚡ Live Stream</button>
+            </div>
+
+            <!-- Live Status Indicator -->
+            <div class="flex items-center gap-2 text-xs font-mono text-spring-green">
+              <span class="pulse-dot"></span>
+              <span class="hidden sm:inline">LIVE INGESTION</span>
+            </div>
+          </div>
+
+          <!-- Mockup Content Body (Simulated E-Commerce / SaaS Dashboard) -->
+          <div id="heroInteractiveArea" class="relative p-6 sm:p-8 bg-canvas min-h-[480px] sm:min-h-[540px] select-none cursor-crosshair overflow-hidden">
+            
+            <!-- Clarity-Style Scroll Depth Line Guide -->
+            <div id="scrollDepthLine" class="scroll-depth-line" style="top: 55%;">
+              <div id="scrollDepthTag" class="scroll-depth-tag">
+                <i data-lucide="eye" class="w-3 h-3 text-spring-green"></i>
+                <span id="scrollReachPercent">65.4% Users Reached This Point</span>
+              </div>
+            </div>
+
+            <!-- Live Interactive Simulated Cursor -->
+            <div id="heroCursor" class="live-cursor hidden sm:flex items-center gap-2" style="top: 40%; left: 35%;">
+              <svg class="w-5 h-5 text-obsidian drop-shadow-md" viewBox="0 0 24 24" fill="#001E2B" stroke="#FFFFFF" stroke-width="1.5">
+                <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
+              </svg>
+              <span class="bg-obsidian text-spring-green text-[10px] font-mono px-1.5 py-0.5 rounded shadow border border-spring-green/30 font-semibold">User #8941 (US-East)</span>
+            </div>
+
+            <!-- Simulated Dashboard Content Background -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10 pointer-events-none">
+              
+              <!-- Metrics Cards Row -->
+              <div class="col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-2xl border border-border-subdued card-elevated">
+                  <div class="text-xs text-text-muted font-medium">Real-Time Visitors</div>
+                  <div class="text-2xl font-heading font-extrabold text-obsidian mt-1 flex items-baseline gap-2">
+                    1,429
+                    <span class="text-xs text-emerald-600 font-semibold">+18.4%</span>
+                  </div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl border border-border-subdued card-elevated">
+                  <div class="text-xs text-text-muted font-medium">Median Scroll Depth</div>
+                  <div class="text-2xl font-heading font-extrabold text-obsidian mt-1 text-emerald-deep">72.8%</div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl border border-border-subdued card-elevated">
+                  <div class="text-xs text-text-muted font-medium">Rage Click Index</div>
+                  <div class="text-2xl font-heading font-extrabold text-red-500 mt-1">0.14% <span class="text-xs font-normal text-text-muted">(Low)</span></div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl border border-border-subdued card-elevated">
+                  <div class="text-xs text-text-muted font-medium">Avg Page Latency</div>
+                  <div class="text-2xl font-heading font-extrabold text-obsidian mt-1 font-mono">0.82ms</div>
+                </div>
+              </div>
+
+              <!-- Main Simulated Interactive Page Structure -->
+              <div class="col-span-12 md:col-span-8 space-y-4">
+                <div class="bg-white p-6 rounded-2xl border border-border-subdued card-elevated relative">
+                  
+                  <div class="flex items-center justify-between pb-4 border-b border-border-subdued">
+                    <div>
+                      <h4 class="font-heading font-bold text-base text-obsidian">Product Checkout & Pricing Matrix</h4>
+                      <p class="text-xs text-text-muted">Target Page: /pricing-enterprise-v3 (Last 24 Hours)</p>
+                    </div>
+                    <span class="text-xs font-mono bg-spring-green/20 text-emerald-900 px-2.5 py-1 rounded-full font-semibold">
+                      48,192 Sessions
+                    </span>
+                  </div>
+
+                  <!-- Simulated visual elements where hotspots live -->
+                  <div class="mt-6 grid grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border-2 border-dashed border-border-subdued bg-canvas flex flex-col justify-between h-32">
+                      <div class="text-xs font-bold text-obsidian">Annual Pro Plan ($29/mo)</div>
+                      <div class="w-full py-2 bg-obsidian text-spring-green rounded-lg text-xs font-bold text-center">
+                        Select Plan →
+                      </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border-2 border-dashed border-border-subdued bg-canvas flex flex-col justify-between h-32">
+                      <div class="text-xs font-bold text-obsidian">Custom Discount Code</div>
+                      <div class="w-full py-2 bg-gray-200 text-text-muted rounded-lg text-xs text-center font-mono">
+                        #coupon-apply
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mt-6 p-4 rounded-xl bg-canvas border border-border-subdued flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-spring-green/30 flex items-center justify-center font-bold text-emerald-900 text-xs">
+                        98%
+                      </div>
+                      <div class="text-xs text-obsidian font-semibold">Universal Compatibility Rating</div>
+                    </div>
+                    <span class="text-xs text-text-muted font-mono">No tracking script blockage</span>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Live Telemetry Stream Ticker (Right Column inside hero) -->
+              <div class="col-span-12 md:col-span-4 bg-obsidian p-5 rounded-2xl border border-border-subdued/20 text-white flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                    <span class="text-xs font-mono text-spring-green font-bold flex items-center gap-1.5">
+                      <i data-lucide="radio" class="w-3.5 h-3.5 animate-pulse"></i> LIVE TELEMETRY
+                    </span>
+                    <span class="text-[10px] text-gray-400 font-mono">0.00ms delay</span>
+                  </div>
+
+                  <!-- Live Stream Feed Item Container -->
+                  <div id="liveStreamFeed" class="mt-3 space-y-2.5 font-mono text-xs max-h-48 overflow-hidden custom-scrollbar">
+                    <div class="p-2 rounded bg-white/5 border border-white/5 flex items-center justify-between">
+                      <span class="text-emerald-400">Click #cta-deploy</span>
+                      <span class="text-gray-400 text-[10px]">12ms ago</span>
+                    </div>
+                    <div class="p-2 rounded bg-white/5 border border-white/5 flex items-center justify-between">
+                      <span class="text-blue-400">Scroll depth 85%</span>
+                      <span class="text-gray-400 text-[10px]">34ms ago</span>
+                    </div>
+                    <div class="p-2 rounded bg-red-500/10 border border-red-500/30 flex items-center justify-between">
+                      <span class="text-red-400">🚨 Rage Click (3x)</span>
+                      <span class="text-gray-400 text-[10px]">110ms ago</span>
+                    </div>
+                    <div class="p-2 rounded bg-white/5 border border-white/5 flex items-center justify-between">
+                      <span class="text-spring-green">DOM Snapshot 4.1KB</span>
+                      <span class="text-gray-400 text-[10px]">180ms ago</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-gray-400">
+                  <span>Clarity Ingest Engine</span>
+                  <span class="text-spring-green font-mono">v4.2.0-stable</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Pulsing Thermal Heatmap Hotspots Layer (Interactive!) -->
+            <div id="heatmapOverlay" class="absolute inset-0 z-20 pointer-events-auto">
+              
+              <!-- Hotspot 1 (High click volume on CTA) -->
+              <div class="heatmap-hotspot hotspot-green" style="top: 52%; left: 24%;" onclick="showHotspotInfo(1)" title="4,821 Clicks (Conversion Button)">
+                <div class="hotspot-badge">1</div>
+              </div>
+
+              <!-- Hotspot 2 (Amber click density on pricing) -->
+              <div class="heatmap-hotspot hotspot-amber" style="top: 48%; left: 45%;" onclick="showHotspotInfo(2)" title="3,190 Clicks (Pro Tier Select)">
+                <div class="hotspot-badge">2</div>
+              </div>
+
+              <!-- Hotspot 3 (Red Rage click cluster on coupon input) -->
+              <div class="heatmap-hotspot hotspot-red" style="top: 76%; left: 45%;" onclick="showHotspotInfo(3)" title="914 Dead Clicks (Coupon Input Bug)">
+                <div class="hotspot-badge">3</div>
+              </div>
+
+              <!-- Hotspot 4 (Cyan scroll interest cluster) -->
+              <div class="heatmap-hotspot hotspot-cyan" style="top: 32%; left: 16%;" onclick="showHotspotInfo(4)" title="1,200 Interactions (Logo / Nav)">
+                <div class="hotspot-badge">4</div>
+              </div>
+
+            </div>
+
+            <!-- Interactive Hotspot Info Tooltip Box (Floating) -->
+            <div id="hotspotTooltip" class="absolute z-30 bottom-6 right-6 max-w-xs bg-obsidian text-white p-4 rounded-2xl border border-spring-green/40 shadow-2xl transition-all duration-300 hidden">
+              <div class="flex items-center justify-between pb-2 border-b border-white/10">
+                <span id="tooltipBadge" class="text-xs font-mono font-bold text-spring-green">HOTSPOT #1 DETAILS</span>
+                <button onclick="hideHotspotInfo()" class="text-gray-400 hover:text-white text-xs">✕</button>
+              </div>
+              <div class="mt-2 space-y-1.5 text-xs">
+                <p class="font-bold text-white" id="tooltipTitle">Primary CTA Button</p>
+                <p class="text-text-muted text-[11px]" id="tooltipDesc">4,821 Total Clicks • 68.4% of users interacted with this element. 0.02% rage rate.</p>
+                <div class="pt-1 flex items-center gap-2 font-mono text-[10px] text-spring-green">
+                  <span>Confidence: 99.8%</span> • <span>Median Time: 4.2s</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom bar of dashboard with quick stats -->
+          <div class="bg-white px-6 py-3 border-t border-border-subdued flex flex-wrap items-center justify-between text-xs text-text-muted">
+            <div class="flex items-center gap-4">
+              <span>💡 <strong class="text-obsidian font-semibold">Live Interactive Demo:</strong> Move your cursor inside to test Clarity scroll reach & click hotspots</span>
+            </div>
+            <div class="font-mono text-emerald-800 font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-spring-green"></span>
+              All 16 Telemetry Edge Nodes Active
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF & LIVE TELEMETRY TICKER -->
+  <section class="border-y border-border-subdued bg-white/70 py-12 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Counters Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        
+        <div class="space-y-1 reveal-on-scroll">
+          <div class="font-heading font-extrabold text-3xl sm:text-4xl text-obsidian tracking-tight flex items-center justify-center">
+            <span class="counter" data-target="12.4">12.4</span><span>M+</span>
+          </div>
+          <div class="text-xs sm:text-sm font-medium text-text-muted">Events Ingested Daily</div>
+        </div>
+
+        <div class="space-y-1 reveal-on-scroll">
+          <div class="font-heading font-extrabold text-3xl sm:text-4xl text-emerald-deep tracking-tight flex items-center justify-center font-mono">
+            <span>&lt; </span><span class="counter" data-target="1.2">1.2</span><span>ms</span>
+          </div>
+          <div class="text-xs sm:text-sm font-medium text-text-muted">Telemetry Ingestion Latency</div>
+        </div>
+
+        <div class="space-y-1 reveal-on-scroll">
+          <div class="font-heading font-extrabold text-3xl sm:text-4xl text-obsidian tracking-tight flex items-center justify-center font-mono">
+            <span class="counter" data-target="99.99">99.99</span><span>%</span>
+          </div>
+          <div class="text-xs sm:text-sm font-medium text-text-muted">Global Ingestion Uptime SLA</div>
+        </div>
+
+        <div class="space-y-1 reveal-on-scroll">
+          <div class="font-heading font-extrabold text-3xl sm:text-4xl text-spring-green drop-shadow-sm tracking-tight flex items-center justify-center font-mono">
+            <span>0.00</span><span>ms</span>
+          </div>
+          <div class="text-xs sm:text-sm font-medium text-text-muted">Main-Thread Page Load Impact</div>
+        </div>
+
+      </div>
+
+      <!-- Framework Compatibility Badges -->
+      <div class="mt-10 pt-8 border-t border-border-subdued/80 flex flex-wrap items-center justify-center gap-6 sm:gap-10 opacity-80 hover:opacity-100 transition-opacity">
+        <div class="flex items-center gap-2 font-mono text-xs font-semibold text-obsidian px-3 py-1.5 rounded-xl bg-canvas border border-border-subdued shadow-sm">
+          <i data-lucide="globe" class="w-4 h-4 text-emerald-deep"></i> HTML5 / Vanilla
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs font-semibold text-obsidian px-3 py-1.5 rounded-xl bg-canvas border border-border-subdued shadow-sm">
+          <i data-lucide="layers" class="w-4 h-4 text-blue-600"></i> WordPress & WooCommerce
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs font-semibold text-obsidian px-3 py-1.5 rounded-xl bg-canvas border border-border-subdued shadow-sm">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-emerald-600"></i> Shopify & Hydrogen
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs font-semibold text-obsidian px-3 py-1.5 rounded-xl bg-canvas border border-border-subdued shadow-sm">
+          <i data-lucide="atom" class="w-4 h-4 text-cyan-500"></i> React & Next.js
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs font-semibold text-obsidian px-3 py-1.5 rounded-xl bg-canvas border border-border-subdued shadow-sm">
+          <i data-lucide="box" class="w-4 h-4 text-emerald-500"></i> Vue & Nuxt 3
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs font-semibold text-obsidian px-3 py-1.5 rounded-xl bg-canvas border border-border-subdued shadow-sm">
+          <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i> Webflow & Framer
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BENTO GRID FEATURE MATRIX (MongoDB Bright Style) -->
+  <section id="heatmaps" class="py-20 md:py-32 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="pill-badge">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-800"></i>
+          <span>Next-Gen Analytics Engine</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-obsidian tracking-tight">
+          Everything Clarity does — plus the parts it doesn't.
+        </h2>
+        <p class="font-body text-base sm:text-lg text-text-muted">
+          Engineered on modern Web Standards with zero third-party telemetry bloat. Instant visual intelligence for engineering, growth, and product teams.
+        </p>
+      </div>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- CARD 1 (Double Width - 8 cols): Microsoft Clarity-Grade Heatmaps -->
+        <div class="col-span-12 lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 card-elevated border border-border-subdued flex flex-col justify-between relative overflow-hidden reveal-on-scroll">
+          
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-border-subdued">
+            <div>
+              <span class="text-xs font-mono font-bold text-emerald-deep tracking-wide uppercase">01 • CLARITY-GRADE HEATMAPS</span>
+              <h3 class="font-heading font-extrabold text-2xl text-obsidian mt-1">Instant Click, Scroll & Rage Maps</h3>
+              <p class="text-sm text-text-muted mt-1">Rendered with sub-pixel SVG precision without sampling limits.</p>
+            </div>
+
+            <!-- Heatmap Interactive Control Tabs -->
+            <div class="flex items-center gap-2 bg-canvas p-1.5 rounded-2xl border border-border-subdued text-xs font-semibold">
+              <button id="bentoHeatmapClickTab" onclick="setBentoHeatmapMode('clicks')" class="px-3.5 py-1.5 rounded-xl bg-obsidian text-white transition-all shadow-sm">
+                Clicks Map
+              </button>
+              <button id="bentoHeatmapScrollTab" onclick="setBentoHeatmapMode('scroll')" class="px-3.5 py-1.5 rounded-xl text-text-muted hover:text-obsidian transition-all">
+                Scroll Reach %
+              </button>
+              <button id="bentoHeatmapRageTab" onclick="setBentoHeatmapMode('rage')" class="px-3.5 py-1.5 rounded-xl text-text-muted hover:text-obsidian transition-all">
+                🚨 Rage Clicks
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Heatmap Canvas Mockup Inside Card -->
+          <div id="bentoHeatmapDisplay" class="my-6 rounded-2xl bg-canvas border border-border-subdued p-6 relative min-h-[300px] flex flex-col justify-between overflow-hidden">
+            
+            <!-- Dynamic Thermal Shader Glows -->
+            <div id="bentoThermalLayer" class="absolute inset-0 pointer-events-none transition-all duration-500">
+              <div class="absolute top-[25%] left-[20%] w-36 h-36 rounded-full bg-red-500/40 blur-2xl"></div>
+              <div class="absolute top-[40%] left-[60%] w-44 h-44 rounded-full bg-amber-400/40 blur-2xl"></div>
+              <div class="absolute top-[70%] left-[30%] w-40 h-40 rounded-full bg-cyan-400/35 blur-2xl"></div>
+              <div class="absolute top-[15%] left-[75%] w-32 h-32 rounded-full bg-spring-green/45 blur-2xl"></div>
+            </div>
+
+            <!-- Simulated Page Wireframe -->
+            <div class="relative z-10 space-y-4">
+              <!-- Mock Hero Wireframe -->
+              <div class="h-6 w-1/3 bg-gray-200/80 rounded-md"></div>
+              <div class="h-4 w-2/3 bg-gray-200/60 rounded-md"></div>
+              <div class="flex items-center gap-3 pt-2">
+                <div class="h-9 w-32 rounded-lg bg-obsidian/90 shadow-sm flex items-center justify-center text-[11px] text-spring-green font-mono font-bold">
+                  CTA #hero-start
+                </div>
+                <div class="h-9 w-28 rounded-lg bg-gray-200/90"></div>
+              </div>
+            </div>
+
+            <!-- Middle Section Wireframe with Heatmap markers -->
+            <div class="relative z-10 grid grid-cols-3 gap-4 pt-8">
+              <div class="p-3 bg-white rounded-xl border border-border-subdued shadow-sm">
+                <div class="h-3 w-16 bg-gray-300 rounded mb-2"></div>
+                <div class="text-xs font-mono font-bold text-obsidian">Tier 1: Free</div>
+                <div class="text-[10px] text-emerald-600 font-mono mt-1">1,940 Clicks (38%)</div>
+              </div>
+              <div class="p-3 bg-white rounded-xl border-2 border-spring-green shadow-sm">
+                <div class="h-3 w-16 bg-spring-green rounded mb-2"></div>
+                <div class="text-xs font-mono font-bold text-obsidian">Tier 2: Pro</div>
+                <div class="text-[10px] text-emerald-800 font-mono mt-1 font-bold">4,120 Clicks (54%)</div>
+              </div>
+              <div class="p-3 bg-white rounded-xl border border-border-subdued shadow-sm">
+                <div class="h-3 w-16 bg-gray-300 rounded mb-2"></div>
+                <div class="text-xs font-mono font-bold text-obsidian">Tier 3: Scale</div>
+                <div class="text-[10px] text-gray-500 font-mono mt-1">420 Clicks (8%)</div>
+              </div>
+            </div>
+
+            <!-- Live Scroll Marker overlay -->
+            <div id="bentoScrollOverlay" class="absolute inset-0 bg-gradient-to-b from-transparent via-spring-green/10 to-emerald-950/20 pointer-events-none hidden flex-col justify-between p-4">
+              <div class="text-xs font-mono font-bold text-emerald-900 bg-white/90 px-2 py-1 rounded w-max shadow">100% Top of Fold</div>
+              <div class="text-xs font-mono font-bold text-emerald-900 bg-white/90 px-2 py-1 rounded w-max shadow">65.4% Users Reach Pricing</div>
+              <div class="text-xs font-mono font-bold text-obsidian bg-white/90 px-2 py-1 rounded w-max shadow">22.1% Reached Footer</div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Feature Highlights -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-border-subdued text-xs text-text-muted">
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-spring-green shrink-0"></i>
+              <span>Zero sampling: capture 100% of clicks</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-spring-green shrink-0"></i>
+              <span>Device breakdown (Mobile, iPad, 4K)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-spring-green shrink-0"></i>
+              <span>Rage & Dead click automated flags</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CARD 2 (4 cols): Privacy-First DOM Session Replay (rrweb) -->
+        <div id="session-replay" class="col-span-12 lg:col-span-4 bg-white rounded-3xl p-6 sm:p-8 card-elevated border border-border-subdued flex flex-col justify-between reveal-on-scroll">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-emerald-deep tracking-wide uppercase">02 • DOM SESSION REPLAY</span>
+              <span class="text-[10px] font-mono bg-spring-green/20 text-emerald-900 px-2 py-0.5 rounded-full font-bold">rrweb v2</span>
+            </div>
+            <h3 class="font-heading font-extrabold text-2xl text-obsidian mt-2">Privacy-First Video Replay</h3>
+            <p class="text-sm text-text-muted mt-1">Reconstruct user sessions faithfully with zero video lag and zero PII leaks.</p>
+          </div>
+
+          <!-- Interactive Replay Player Mockup -->
+          <div class="my-6 rounded-2xl bg-obsidian text-white p-4 border border-white/10 shadow-lg relative">
+            
+            <!-- Replay Screen -->
+            <div class="bg-obsidian-light rounded-xl p-4 min-h-[160px] flex flex-col justify-between relative overflow-hidden">
+              <div class="flex items-center justify-between text-[11px] text-gray-400 font-mono">
+                <span class="flex items-center gap-1.5 text-spring-green">
+                  <span class="w-2 h-2 rounded-full bg-spring-green animate-pulse"></span>
+                  REPLAY #5820
+                </span>
+                <span>Chrome 124 • macOS</span>
+              </div>
+
+              <!-- Masked PII Demo Container inside Player -->
+              <div class="my-3 p-2.5 rounded-lg bg-black/40 border border-white/10 text-xs font-mono space-y-1.5">
+                <div class="flex items-center justify-between text-gray-400">
+                  <span>Cardholder:</span>
+                  <span class="bg-spring-green/20 text-spring-green px-1.5 py-0.5 rounded text-[10px] font-semibold">[MASKED PII]</span>
+                </div>
+                <div class="flex items-center justify-between text-gray-400">
+                  <span>CVV / Password:</span>
+                  <span class="text-spring-green">••••••••</span>
+                </div>
+              </div>
+
+              <!-- Animated Replay Progress Bar -->
+              <div class="space-y-1.5">
+                <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                  <div id="replayProgressBar" class="h-full bg-spring-green transition-all duration-300" style="width: 45%;"></div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] font-mono text-gray-400">
+                  <span id="replayTime">01:14</span>
+                  <span>02:45</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="mt-3 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <button id="replayPlayBtn" onclick="toggleReplayPlay()" class="p-2 rounded-lg bg-spring-green text-obsidian font-bold hover:scale-105 transition-transform" aria-label="Play or pause session replay">
+                  <i id="replayPlayIcon" data-lucide="play" class="w-3.5 h-3.5 fill-obsidian"></i>
+                </button>
+                <div class="flex items-center gap-1 bg-white/10 p-0.5 rounded-lg text-[10px] font-mono">
+                  <button onclick="setReplaySpeed('1x')" class="px-2 py-0.5 rounded text-spring-green font-bold">1x</button>
+                  <button onclick="setReplaySpeed('2x')" class="px-2 py-0.5 rounded text-gray-400 hover:text-white">2x</button>
+                  <button onclick="setReplaySpeed('4x')" class="px-2 py-0.5 rounded text-gray-400 hover:text-white">4x</button>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-1.5 text-[10px] font-mono text-gray-300">
+                <input type="checkbox" id="skipInactivity" checked class="accent-spring-green rounded" />
+                <label for="skipInactivity">Skip Inactivity</label>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="space-y-2 text-xs text-text-muted">
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-spring-green shrink-0"></i>
+              <span>Client-side PII scrubbing before telemetry egress</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="hard-drive" class="w-4 h-4 text-spring-green shrink-0"></i>
+              <span>90% lighter storage footprint than video mp4</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CARD 3 (6 cols): AI Root-Cause Anomaly Detection -->
+        <div id="ai-insights" class="col-span-12 lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 card-elevated border border-border-subdued flex flex-col justify-between reveal-on-scroll">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-emerald-deep tracking-wide uppercase">03 • AI ROOT-CAUSE COPILOT</span>
+              <span class="text-[10px] font-mono bg-spring-green/20 text-emerald-900 px-2 py-0.5 rounded-full font-bold">GPT-4 Grounded</span>
+            </div>
+            <h3 class="font-heading font-extrabold text-2xl text-obsidian mt-2">Automated Frustration Diagnosis</h3>
+            <p class="text-sm text-text-muted mt-1">Don't sift through 1,000 hours of video. Let AI pinpoint the exact HTML element causing drop-offs.</p>
+          </div>
+
+          <!-- Interactive AI Insight Chat Container -->
+          <div class="my-6 rounded-2xl bg-canvas border border-border-subdued p-4 space-y-3 font-body">
+            
+            <!-- Quick prompt chips -->
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="triggerAiPrompt('checkout')" class="text-[11px] font-mono font-medium px-2.5 py-1 rounded-lg bg-white border border-border-subdued hover:border-spring-green text-obsidian shadow-sm transition-all">
+                🔍 Why did Safari checkout drop?
+              </button>
+              <button onclick="triggerAiPrompt('pricing')" class="text-[11px] font-mono font-medium px-2.5 py-1 rounded-lg bg-white border border-border-subdued hover:border-spring-green text-obsidian shadow-sm transition-all">
+                ⚡ Rage clicks on pricing tier
+              </button>
+            </div>
+
+            <!-- AI Response Box -->
+            <div id="aiResponseCard" class="p-4 rounded-xl bg-white border border-border-subdued shadow-sm space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-md bg-obsidian flex items-center justify-center">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-spring-green"></i>
+                  </div>
+                  <span class="text-xs font-bold text-obsidian">WebPro AI Assistant</span>
+                </div>
+                <span class="text-[10px] font-mono text-emerald-700 bg-spring-green/20 px-2 py-0.5 rounded font-semibold">Grounded Root Cause</span>
+              </div>
+              <p id="aiResponseText" class="text-xs text-obsidian leading-relaxed">
+                <strong>Anomaly Detected:</strong> On Safari iOS 17.4, <strong>+34.2% dead clicks</strong> occurred on <code class="bg-gray-100 px-1 py-0.5 rounded font-mono text-[11px]">#coupon-apply-btn</code>. The submit event is intercepted by an invisible overlapping sticky floating banner.
+              </p>
+              <div class="pt-2 border-t border-border-subdued flex items-center justify-between text-[11px] text-text-muted font-mono">
+                <span class="text-red-500 font-semibold">Impact: ~$4,200 Lost MRR</span>
+                <span class="text-emerald-700 font-semibold">Fix: z-index + 10</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="flex items-center gap-2 text-xs text-text-muted">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-spring-green shrink-0"></i>
+            <span>Continuous background anomaly scans with Slack & Discord webhooks</span>
+          </div>
+        </div>
+
+        <!-- CARD 4 (6 cols): Conversion Funnels & User Journeys -->
+        <div id="funnels" class="col-span-12 lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 card-elevated border border-border-subdued flex flex-col justify-between reveal-on-scroll">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-emerald-deep tracking-wide uppercase">04 • CONVERSION FUNNELS</span>
+              <span class="text-[10px] font-mono bg-spring-green/20 text-emerald-900 px-2 py-0.5 rounded-full font-bold">Retroactive Query</span>
+            </div>
+            <h3 class="font-heading font-extrabold text-2xl text-obsidian mt-2">Retroactive Multi-Step Funnels</h3>
+            <p class="text-sm text-text-muted mt-1">Define steps today, see conversion data from 90 days ago. No pre-tagging required.</p>
+          </div>
+
+          <!-- Interactive Funnel Steps Visualizer -->
+          <div class="my-6 rounded-2xl bg-canvas border border-border-subdued p-5 space-y-3">
+            
+            <!-- Step 1 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-obsidian flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-obsidian text-spring-green font-mono text-[10px] flex items-center justify-center font-bold">1</span>
+                  Landing Page View
+                </span>
+                <span class="font-mono font-bold text-obsidian">120,400 (100%)</span>
+              </div>
+              <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                <div class="bg-obsidian h-full rounded-full" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-obsidian flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-obsidian text-spring-green font-mono text-[10px] flex items-center justify-center font-bold">2</span>
+                  View Pricing Table
+                </span>
+                <span class="font-mono font-bold text-obsidian">82,100 (68.2%)</span>
+              </div>
+              <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                <div class="bg-emerald-deep h-full rounded-full" style="width: 68.2%;"></div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-obsidian flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-obsidian text-spring-green font-mono text-[10px] flex items-center justify-center font-bold">3</span>
+                  Checkout Initiated
+                </span>
+                <span class="font-mono font-bold text-obsidian">34,500 (28.6%)</span>
+              </div>
+              <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                <div class="bg-emerald-600 h-full rounded-full" style="width: 28.6%;"></div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-obsidian flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-obsidian text-spring-green font-mono text-[10px] flex items-center justify-center font-bold">4</span>
+                  Completed Purchase
+                </span>
+                <span class="font-mono font-bold text-emerald-800">22,800 (18.9%)</span>
+              </div>
+              <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                <div class="bg-spring-green h-full rounded-full" style="width: 18.9%;"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-text-muted">
+            <span class="font-mono">Median Time to Complete: <strong>2m 45s</strong></span>
+            <span class="text-emerald-700 font-semibold">Overall Conv: 18.9%</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- "1-LINE INSTALLATION" INTERACTIVE CODE PLAYGROUND -->
+  <section id="playground" class="py-20 md:py-32 bg-obsidian text-white relative overflow-hidden">
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 bg-dark-grid opacity-20 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-spring-green/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Copy & Value Proposition -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="pill-badge bg-spring-green/15 text-spring-green border-spring-green/30">
+            <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+            <span>30-Second Zero-Friction Setup</span>
+          </div>
+
+          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight">
+            Paste one line. <br /><span class="text-spring-green">Watch the telemetry beacon arrive.</span>
+          </h2>
+
+          <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+            No build steps, no webpack plugins, and no npm headaches required. Works immediately on static sites, modern SPAs, Jamstack, and headless stores.
+          </p>
+
+          <!-- Interactive Test Beacon Trigger -->
+          <div class="pt-4 space-y-3">
+            <button id="sendBeaconBtn" onclick="simulateTestBeacon()" class="btn-spring px-6 py-3.5 rounded-xl text-sm font-bold flex items-center gap-2.5">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span>Send Live Test Beacon Now</span>
+            </button>
+            <p class="text-xs text-gray-400 font-mono">Simulates a real-time event packet from your browser to WebPro Ingest Node</p>
+          </div>
+
+          <!-- Feature checkmarks -->
+          <div class="space-y-2 pt-2 text-xs font-mono text-gray-300">
+            <div class="flex items-center gap-2">
+              <i data-lucide="check" class="w-4 h-4 text-spring-green"></i> 5.2KB Brotli compressed script
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check" class="w-4 h-4 text-spring-green"></i> Asynchronous non-blocking loading
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="check" class="w-4 h-4 text-spring-green"></i> zero cookies required (cookieless mode)
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Code Sandbox -->
+        <div class="lg:col-span-7">
+          <div class="code-window overflow-hidden border border-white/10">
+            
+            <!-- Tab selector -->
+            <div class="bg-black/50 px-4 py-3 border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl">
+                <button id="tabHtml" onclick="setCodeTab('html')" class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-spring-green text-obsidian transition-all">
+                  HTML / WordPress
+                </button>
+                <button id="tabReact" onclick="setCodeTab('react')" class="px-3 py-1.5 rounded-lg text-xs font-mono text-gray-300 hover:text-white transition-all">
+                  React / Next.js
+                </button>
+                <button id="tabVue" onclick="setCodeTab('vue')" class="px-3 py-1.5 rounded-lg text-xs font-mono text-gray-300 hover:text-white transition-all">
+                  Vue / Nuxt
+                </button>
+                <button id="tabShopify" onclick="setCodeTab('shopify')" class="px-3 py-1.5 rounded-lg text-xs font-mono text-gray-300 hover:text-white transition-all">
+                  Shopify Liquid
+                </button>
+              </div>
+
+              <!-- Copy snippet button -->
+              <button id="copySnippetBtn" onclick="copySnippetCode()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-mono font-semibold text-white transition-colors border border-white/10">
+                <i id="copyIcon" data-lucide="copy" class="w-3.5 h-3.5 text-spring-green"></i>
+                <span id="copyText">Copy Snippet</span>
+              </button>
+            </div>
+
+            <!-- Code content area -->
+            <div class="p-6 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto custom-scrollbar">
+              <pre id="codeContentDisplay" class="text-gray-200"><code><span class="code-token-comment">&lt;!-- WebPro Analytics 1-Line Ingestion Snippet --&gt;</span>
+<span class="code-token-tag">&lt;script</span>
+  <span class="code-token-attr">defer</span>
+  <span class="code-token-attr">src</span>=<span class="code-token-string">"https://cdn.webpro.io/tag.js"</span>
+  <span class="code-token-attr">data-project-id</span>=<span class="code-token-string">"prj_live_994a02c"</span>
+  <span class="code-token-attr">data-zero-cookie</span>=<span class="code-token-string">"true"</span>
+  <span class="code-token-attr">data-privacy-mask</span>=<span class="code-token-string">"auto"</span><span class="code-token-tag">&gt;</span>
+<span class="code-token-tag">&lt;/script&gt;</span></code></pre>
+            </div>
+
+            <!-- Live Status Simulator Bar -->
+            <div id="beaconStatusBox" class="bg-black/60 px-6 py-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+              <div class="flex items-center gap-2.5">
+                <span id="beaconIndicator" class="pulse-dot"></span>
+                <span id="beaconStatusText" class="text-gray-300">Listening for incoming beacon handshake...</span>
+              </div>
+              <span id="beaconLatency" class="text-spring-green font-bold">Cluster #3 (US-East)</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE PRICING CALCULATOR -->
+  <section id="pricing" class="py-20 md:py-32 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="pill-badge">
+          <i data-lucide="tag" class="w-3.5 h-3.5 text-emerald-800"></i>
+          <span>Transparent & Predictable</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-obsidian tracking-tight">
+          Pricing that scales with your traffic, not your headcount.
+        </h2>
+        <p class="font-body text-base sm:text-lg text-text-muted">
+          Unlimited team seats on every plan. Free forever for open-source self-hosters.
+        </p>
+
+        <!-- Billing Period Toggle Switch -->
+        <div class="pt-4 flex items-center justify-center gap-4">
+          <span id="monthlyLabel" class="text-sm font-semibold text-obsidian">Monthly</span>
+          <button id="billingToggle" onclick="toggleBillingPeriod()" class="w-14 h-8 bg-obsidian rounded-full p-1 transition-colors relative flex items-center" aria-label="Toggle annual or monthly pricing">
+            <div id="billingToggleKnob" class="w-6 h-6 bg-spring-green rounded-full shadow-md transition-transform translate-x-6"></div>
+          </button>
+          <span id="annualLabel" class="text-sm font-semibold text-emerald-deep flex items-center gap-1.5">
+            Annual Billing
+            <span class="bg-spring-green/20 text-emerald-900 text-[11px] font-bold px-2 py-0.5 rounded-full">Save 20%</span>
+          </span>
+        </div>
+
+        <!-- Interactive Event Slider -->
+        <div class="mt-8 max-w-xl mx-auto p-6 bg-white rounded-2xl border border-border-subdued card-elevated">
+          <div class="flex items-center justify-between text-sm font-bold text-obsidian pb-3">
+            <span>Estimated Monthly Pageviews:</span>
+            <span id="sliderValueText" class="font-mono text-emerald-deep text-base">500,000 Events</span>
+          </div>
+          <input type="range" id="trafficSlider" min="1" max="100" value="50" oninput="updatePricingSlider(this.value)" aria-label="Estimated monthly pageviews slider" />
+          <div class="flex items-center justify-between text-[11px] font-mono text-text-muted mt-2">
+            <span>50K (Starter)</span>
+            <span>500K (Pro)</span>
+            <span>5M+ (Enterprise)</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pricing Tier Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- TIER 1: Starter / Open-Source -->
+        <div class="bg-white rounded-3xl p-8 card-elevated border border-border-subdued flex flex-col justify-between reveal-on-scroll">
+          <div>
+            <div class="text-xs font-mono font-bold text-emerald-deep uppercase tracking-wider">Tier 1 • Self-Hosted / Community</div>
+            <h3 class="font-heading font-extrabold text-2xl text-obsidian mt-2">Starter & Open-Source</h3>
+            <p class="text-sm text-text-muted mt-1">Perfect for indie hackers, small sites, and local Docker deployments.</p>
+
+            <div class="my-6">
+              <div class="flex items-baseline gap-1">
+                <span class="font-heading font-extrabold text-4xl text-obsidian">$0</span>
+                <span class="text-sm text-text-muted font-medium">/ month forever</span>
+              </div>
+              <span class="text-xs font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-2">
+                MIT Licensed • Unlimited Self-Hosted
+              </span>
+            </div>
+
+            <div class="space-y-3 pt-6 border-t border-border-subdued text-xs text-obsidian">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Up to 50,000 monthly events (Cloud)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>30-Day Session Replay Retention</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Unlimited websites & domains</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Standard Heatmaps & Scroll maps</span>
+              </div>
+              <div class="flex items-center gap-2.5 text-text-muted">
+                <i data-lucide="x" class="w-4 h-4 text-gray-400 shrink-0"></i>
+                <span>AI Root-Cause Anomaly Detection</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <a href="#playground" class="w-full btn-ghost py-3.5 rounded-xl text-sm font-bold text-center block">
+              Deploy Free
+            </a>
+          </div>
+        </div>
+
+        <!-- TIER 2: Pro Cloud (Featured) -->
+        <div class="bg-obsidian rounded-3xl p-8 card-dark border-2 border-spring-green flex flex-col justify-between relative shadow-2xl reveal-on-scroll transform lg:-translate-y-3">
+          <!-- Featured Badge -->
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-spring-green text-obsidian font-mono font-extrabold text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider shadow-md">
+            ⭐ Most Popular for Growth
+          </div>
+
+          <div>
+            <div class="text-xs font-mono font-bold text-spring-green uppercase tracking-wider">Tier 2 • Pro Cloud Ingestion</div>
+            <h3 class="font-heading font-extrabold text-2xl text-white mt-2">Pro Cloud</h3>
+            <p class="text-sm text-gray-300 mt-1">For fast-growing SaaS, e-commerce, and high-converting agencies.</p>
+
+            <div class="my-6">
+              <div class="flex items-baseline gap-1">
+                <span id="proPriceValue" class="font-heading font-extrabold text-5xl text-white">$23</span>
+                <span class="text-sm text-gray-300 font-medium">/ month</span>
+              </div>
+              <span id="proBillingInterval" class="text-xs font-mono text-spring-green bg-white/10 px-2.5 py-0.5 rounded inline-block mt-2">
+                Billed Annually ($276/yr)
+              </span>
+            </div>
+
+            <div class="space-y-3 pt-6 border-t border-white/10 text-xs text-gray-200">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-spring-green shrink-0"></i>
+                <span><strong class="text-white">500,000 monthly events</strong> included</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-spring-green shrink-0"></i>
+                <span><strong class="text-white">1-Year Data Retention</strong></span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-spring-green shrink-0"></i>
+                <span><strong class="text-spring-green">AI Root-Cause Copilot</strong> with Slack alerts</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-spring-green shrink-0"></i>
+                <span>Retroactive Funnel Journey Explorer</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-spring-green shrink-0"></i>
+                <span>Unlimited team seats & collaborators</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <button onclick="openSandboxModal()" class="w-full btn-spring py-3.5 rounded-xl text-sm font-bold text-center block shadow-lg">
+              Start 14-Day Pro Trial →
+            </button>
+          </div>
+        </div>
+
+        <!-- TIER 3: Enterprise Scale -->
+        <div class="bg-white rounded-3xl p-8 card-elevated border border-border-subdued flex flex-col justify-between reveal-on-scroll">
+          <div>
+            <div class="text-xs font-mono font-bold text-emerald-deep uppercase tracking-wider">Tier 3 • Dedicated Clusters</div>
+            <h3 class="font-heading font-extrabold text-2xl text-obsidian mt-2">Enterprise Scale</h3>
+            <p class="text-sm text-text-muted mt-1">For mission-critical enterprises requiring custom data residency & SLAs.</p>
+
+            <div class="my-6">
+              <div class="flex items-baseline gap-1">
+                <span id="enterprisePriceValue" class="font-heading font-extrabold text-4xl text-obsidian">$159</span>
+                <span class="text-sm text-text-muted font-medium">/ month</span>
+              </div>
+              <span class="text-xs font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-2">
+                Custom Ingestion Nodes Available
+              </span>
+            </div>
+
+            <div class="space-y-3 pt-6 border-t border-border-subdued text-xs text-obsidian">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>5,000,000+ monthly events</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Custom SAML SSO & Okta Integration</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Google Analytics 4 & BigQuery multi-sync</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>99.99% Uptime SLA & Dedicated Engineer</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>HIPAA & SOC 2 Type II Compliance BAA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <a href="mailto:sales@webpro.io" class="w-full btn-ghost py-3.5 rounded-xl text-sm font-bold text-center block">
+              Contact Enterprise Sales
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE: WebPro vs Microsoft Clarity vs Hotjar -->
+  <section id="comparison" class="py-20 md:py-32 bg-white border-y border-border-subdued relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="pill-badge">
+          <i data-lucide="scale" class="w-3.5 h-3.5 text-emerald-800"></i>
+          <span>Feature-By-Feature Breakdown</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-obsidian tracking-tight">
+          How WebPro stacks up against legacy tools.
+        </h2>
+        <p class="font-body text-base text-text-muted">
+          Compare page speed, data ownership, zero-cookie compliance, and AI capabilities.
+        </p>
+      </div>
+
+      <!-- Comparison Matrix Table -->
+      <div class="overflow-x-auto card-elevated rounded-3xl border border-border-subdued bg-white">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-border-subdued bg-canvas">
+              <th class="p-5 sm:p-6 text-sm font-bold text-obsidian w-2/5">Capabilities</th>
+              <th class="p-5 sm:p-6 text-sm font-extrabold text-emerald-deep bg-spring-green/15 w-1/5 text-center">
+                WebPro Analytics
+              </th>
+              <th class="p-5 sm:p-6 text-sm font-bold text-obsidian w-1/5 text-center">
+                Microsoft Clarity
+              </th>
+              <th class="p-5 sm:p-6 text-sm font-bold text-obsidian w-1/5 text-center">
+                Hotjar
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border-subdued text-xs sm:text-sm">
+            
+            <!-- Row 1 -->
+            <tr class="hover:bg-canvas/60 transition-colors">
+              <td class="p-5 sm:p-6 font-semibold text-obsidian">
+                <div>Main-Thread Page Load Penalty</div>
+                <span class="text-xs text-text-muted font-normal">Impact on Core Web Vitals (LCP/INP)</span>
+              </td>
+              <td class="p-5 sm:p-6 bg-spring-green/10 text-center font-mono font-bold text-emerald-800">
+                0.00ms (5KB Script)
+              </td>
+              <td class="p-5 sm:p-6 text-center text-text-muted font-mono">
+                ~18ms - 35ms
+              </td>
+              <td class="p-5 sm:p-6 text-center text-text-muted font-mono">
+                ~45ms - 80ms
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr class="hover:bg-canvas/60 transition-colors">
+              <td class="p-5 sm:p-6 font-semibold text-obsidian">
+                <div>Zero-Cookie GDPR/HIPAA Mode</div>
+                <span class="text-xs text-text-muted font-normal">No cookie banner or consent opt-in needed</span>
+              </td>
+              <td class="p-5 sm:p-6 bg-spring-green/10 text-center text-emerald-700">
+                <i data-lucide="check-circle-2" class="w-5 h-5 mx-auto text-spring-green fill-obsidian"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-text-muted">
+                Requires Consent
+              </td>
+              <td class="p-5 sm:p-6 text-center text-text-muted">
+                Requires Consent
+              </td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr class="hover:bg-canvas/60 transition-colors">
+              <td class="p-5 sm:p-6 font-semibold text-obsidian">
+                <div>Open Source & Self-Hostable</div>
+                <span class="text-xs text-text-muted font-normal">Run in your own AWS VPC / Docker container</span>
+              </td>
+              <td class="p-5 sm:p-6 bg-spring-green/10 text-center text-emerald-700">
+                <i data-lucide="check-circle-2" class="w-5 h-5 mx-auto text-spring-green fill-obsidian"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-gray-400">
+                <i data-lucide="x" class="w-5 h-5 mx-auto text-gray-400"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-gray-400">
+                <i data-lucide="x" class="w-5 h-5 mx-auto text-gray-400"></i>
+              </td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr class="hover:bg-canvas/60 transition-colors">
+              <td class="p-5 sm:p-6 font-semibold text-obsidian">
+                <div>AI Root-Cause Anomaly Detection</div>
+                <span class="text-xs text-text-muted font-normal">Natural language diagnostic explanations</span>
+              </td>
+              <td class="p-5 sm:p-6 bg-spring-green/10 text-center text-emerald-700">
+                <i data-lucide="check-circle-2" class="w-5 h-5 mx-auto text-spring-green fill-obsidian"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-text-muted">
+                Basic Copilot
+              </td>
+              <td class="p-5 sm:p-6 text-center text-gray-400">
+                <i data-lucide="x" class="w-5 h-5 mx-auto text-gray-400"></i>
+              </td>
+            </tr>
+
+            <!-- Row 5 -->
+            <tr class="hover:bg-canvas/60 transition-colors">
+              <td class="p-5 sm:p-6 font-semibold text-obsidian">
+                <div>Client-Side PII Masking Engine</div>
+                <span class="text-xs text-text-muted font-normal">Credit cards & passwords never leave visitor device</span>
+              </td>
+              <td class="p-5 sm:p-6 bg-spring-green/10 text-center text-emerald-700">
+                <i data-lucide="check-circle-2" class="w-5 h-5 mx-auto text-spring-green fill-obsidian"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-emerald-700">
+                <i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-600"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-emerald-700">
+                <i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-600"></i>
+              </td>
+            </tr>
+
+            <!-- Row 6 -->
+            <tr class="hover:bg-canvas/60 transition-colors">
+              <td class="p-5 sm:p-6 font-semibold text-obsidian">
+                <div>Retroactive Funnel Filtering</div>
+                <span class="text-xs text-text-muted font-normal">Backfill historical conversion journeys</span>
+              </td>
+              <td class="p-5 sm:p-6 bg-spring-green/10 text-center text-emerald-700">
+                <i data-lucide="check-circle-2" class="w-5 h-5 mx-auto text-spring-green fill-obsidian"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-gray-400">
+                <i data-lucide="x" class="w-5 h-5 mx-auto text-gray-400"></i>
+              </td>
+              <td class="p-5 sm:p-6 text-center text-emerald-700">
+                <i data-lucide="check" class="w-5 h-5 mx-auto text-emerald-600"></i>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="py-20 md:py-28 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12 space-y-3">
+        <h2 class="font-heading font-extrabold text-3xl text-obsidian">Frequently Asked Questions</h2>
+        <p class="text-text-muted text-sm sm:text-base">Everything you need to know about compliance, integration, and performance.</p>
+      </div>
+
+      <div class="space-y-4" id="faqAccordion">
+        
+        <div class="bg-white rounded-2xl border border-border-subdued overflow-hidden card-elevated">
+          <button onclick="toggleFaq(1)" class="w-full px-6 py-5 text-left font-bold text-obsidian flex items-center justify-between gap-4">
+            <span>How does WebPro achieve 0.00ms main-thread page load impact?</span>
+            <i id="faqIcon1" data-lucide="chevron-down" class="w-5 h-5 text-text-muted transition-transform"></i>
+          </button>
+          <div id="faqContent1" class="px-6 pb-5 text-xs sm:text-sm text-text-muted leading-relaxed hidden">
+            WebPro's tracker is under 5KB (Brotli) and executes purely off the critical path using <code>requestIdleCallback</code> and Web Workers. Network telemetry is batched and flushed via <code>navigator.sendBeacon()</code>, guaranteeing zero layout shift (CLS) and zero execution delay (INP).
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-border-subdued overflow-hidden card-elevated">
+          <button onclick="toggleFaq(2)" class="w-full px-6 py-5 text-left font-bold text-obsidian flex items-center justify-between gap-4">
+            <span>Do I need a GDPR cookie banner to use WebPro?</span>
+            <i id="faqIcon2" data-lucide="chevron-down" class="w-5 h-5 text-text-muted transition-transform"></i>
+          </button>
+          <div id="faqContent2" class="px-6 pb-5 text-xs sm:text-sm text-text-muted leading-relaxed hidden">
+            No! By enabling <code>data-zero-cookie="true"</code>, WebPro operates in 100% cookieless mode using daily-rotating cryptographic IP hashes that cannot be reverse-engineered. This complies fully with GDPR, ePrivacy Directive, and CCPA out of the box.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-border-subdued overflow-hidden card-elevated">
+          <button onclick="toggleFaq(3)" class="w-full px-6 py-5 text-left font-bold text-obsidian flex items-center justify-between gap-4">
+            <span>Can I self-host WebPro on my own AWS or DigitalOcean server?</span>
+            <i id="faqIcon3" data-lucide="chevron-down" class="w-5 h-5 text-text-muted transition-transform"></i>
+          </button>
+          <div id="faqContent3" class="px-6 pb-5 text-xs sm:text-sm text-text-muted leading-relaxed hidden">
+            Yes. The entire core ingestion pipeline and ClickHouse/MongoDB backend is open-source under the MIT license. You can spin up a self-hosted instance with a single <code>docker-compose up -d</code> command.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-border-subdued overflow-hidden card-elevated">
+          <button onclick="toggleFaq(4)" class="w-full px-6 py-5 text-left font-bold text-obsidian flex items-center justify-between gap-4">
+            <span>How does the AI Root-Cause Anomaly Detection work?</span>
+            <i id="faqIcon4" data-lucide="chevron-down" class="w-5 h-5 text-text-muted transition-transform"></i>
+          </button>
+          <div id="faqContent4" class="px-6 pb-5 text-xs sm:text-sm text-text-muted leading-relaxed hidden">
+            WebPro automatically clusters rage clicks, dead clicks, and JavaScript console errors against specific DOM CSS selectors. Our model summarizes statistical anomalies into clear, actionable plain English root-cause reports.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER & CONVERSION CTA BANNER -->
+  <section class="bg-obsidian text-white pt-20 pb-12 relative overflow-hidden">
+    <div class="ambient-glow-1 opacity-20"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Big Glowing Banner -->
+      <div class="rounded-3xl bg-gradient-to-b from-obsidian-light to-obsidian p-8 sm:p-14 border border-spring-green/30 shadow-2xl text-center space-y-6 relative overflow-hidden">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-spring-green/20 blur-3xl pointer-events-none"></div>
+
+        <h2 class="font-heading font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+          Start Understanding Your Audience in 30 Seconds.
+        </h2>
+        <p class="text-gray-300 text-base sm:text-lg max-w-xl mx-auto">
+          Enter your website URL below to generate your customized 1-line tracking snippet immediately.
+        </p>
+
+        <!-- Quick Generator Input -->
+        <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-2 pt-2">
+          <input 
+            type="text" 
+            id="quickDomainInput" 
+            placeholder="yourcompany.com" 
+            class="flex-1 bg-black/50 border border-white/20 rounded-xl px-4 py-3.5 text-sm font-mono text-white placeholder-gray-500 focus:outline-none focus:border-spring-green"
+          />
+          <button onclick="generateCustomSnippet()" class="btn-spring px-6 py-3.5 rounded-xl text-sm font-bold shrink-0">
+            Generate Snippet
+          </button>
+        </div>
+
+        <div class="pt-2 text-xs text-gray-400 font-mono">
+          Free Forever Community Plan • No Credit Card Required
+        </div>
+      </div>
+
+      <!-- Minimalist Footer Navigation -->
+      <div class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-gray-400">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+            <i data-lucide="activity" class="w-4 h-4 text-spring-green"></i>
+          </div>
+          <span class="font-heading font-bold text-white text-sm">WebPro Analytics</span>
+          <span>© 2026 WebPro Technologies Inc.</span>
+        </div>
+
+        <!-- Ingestion Status Indicator -->
+        <div class="flex items-center gap-2 font-mono text-spring-green bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+          <span class="w-2 h-2 rounded-full bg-spring-green animate-pulse"></span>
+          <span>● All Ingestion Clusters Operational (1.1ms latency)</span>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-white transition-colors">Security & SOC2</a>
+          <a href="#" class="hover:text-white transition-colors">GitHub Repository</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FULL LIVE SANDBOX MODAL -->
+  <div id="sandboxModal" class="fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-4xl w-full border border-border-subdued shadow-2xl overflow-hidden animate-fadeIn">
+      
+      <!-- Modal Header -->
+      <div class="bg-obsidian text-white p-5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-spring-green/20 flex items-center justify-center">
+            <i data-lucide="play-circle" class="w-5 h-5 text-spring-green"></i>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-base text-white">Live WebPro Interactive Sandbox</h3>
+            <p class="text-xs text-gray-400 font-mono">Test heatmaps, rage clicks & session recording live in your browser</p>
+          </div>
+        </div>
+        <button onclick="closeSandboxModal()" class="text-gray-400 hover:text-white p-2 rounded-lg" aria-label="Close sandbox modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Sandbox Interactive Workspace -->
+      <div class="p-6 sm:p-8 space-y-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Sandbox Button 1 -->
+          <div class="p-4 rounded-2xl bg-canvas border border-border-subdued text-center space-y-3">
+            <div class="text-xs font-bold text-obsidian">Normal Interaction</div>
+            <button onclick="handleSandboxClick('normal')" class="w-full btn-primary py-2.5 rounded-xl text-xs font-bold">
+              Click Normal Button
+            </button>
+            <div id="sandboxCountNormal" class="text-[11px] font-mono text-emerald-700">0 Clicks Logged</div>
+          </div>
+
+          <!-- Sandbox Button 2 (Rage Click Detector) -->
+          <div class="p-4 rounded-2xl bg-red-50/50 border border-red-200 text-center space-y-3">
+            <div class="text-xs font-bold text-red-900">Rage Click Simulator</div>
+            <button onclick="handleSandboxClick('rage')" class="w-full bg-red-600 text-white hover:bg-red-700 py-2.5 rounded-xl text-xs font-bold transition-all">
+              Rapid Click Here!
+            </button>
+            <div id="sandboxCountRage" class="text-[11px] font-mono text-red-600">0 Rage Events Logged</div>
+          </div>
+
+          <!-- Sandbox Button 3 (Dead Click Detector) -->
+          <div class="p-4 rounded-2xl bg-amber-50/50 border border-amber-200 text-center space-y-3">
+            <div class="text-xs font-bold text-amber-900">Dead Click Simulator</div>
+            <button onclick="handleSandboxClick('dead')" class="w-full bg-amber-500 text-obsidian hover:bg-amber-600 py-2.5 rounded-xl text-xs font-bold transition-all">
+              Non-Responsive Element
+            </button>
+            <div id="sandboxCountDead" class="text-[11px] font-mono text-amber-700">0 Dead Clicks Logged</div>
+          </div>
+        </div>
+
+        <!-- Live Sandbox Event Console -->
+        <div class="bg-obsidian text-white p-4 rounded-2xl border border-white/10 font-mono text-xs space-y-2">
+          <div class="flex items-center justify-between text-gray-400 pb-2 border-b border-white/10">
+            <span class="text-spring-green font-bold flex items-center gap-1.5">
+              <span class="pulse-dot"></span> LIVE SANDBOX EVENT BUFFER
+            </span>
+            <span id="sandboxEventCount">3 events captured</span>
+          </div>
+          <div id="sandboxLogList" class="space-y-1.5 max-h-36 overflow-y-auto custom-scrollbar text-[11px]">
+            <div class="text-gray-400">[0.00s] Initialized rrweb DOM listener on client window</div>
+            <div class="text-emerald-400">[0.12s] Event: viewport_resize(1440x900) recorded</div>
+            <div class="text-spring-green">[0.25s] Ingest connection verified (latency: 1.12ms)</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-canvas px-6 py-4 border-t border-border-subdued flex items-center justify-between">
+        <span class="text-xs text-text-muted font-mono">Real-time simulation active</span>
+        <button onclick="closeSandboxModal()" class="btn-primary px-5 py-2 rounded-xl text-xs font-bold">
+          Done Exploring
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Engine -->
+  <script src="app.js"></script>
+</body>
+</html>
